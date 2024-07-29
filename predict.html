@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+          background: linear-gradient(to right, #ff4e50, #f9d423);
+          background-size: 200% 200%;
+          animation: flowing-gradient 10s ease infinite;
+        }
+
+        @keyframes flowing-gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 48px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .flag-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .flag {
+            font-size: 150px;
+        }
+
+        .churn-risk-scores {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .churn-text {
+            font-size: 20px;
+            font-style: italic;
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            margin-top:15px
+        }
+
+        .back-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #45a049, #4CAF50);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Churn Predictor</h1>
+        {% if prediction == 'YES' %}
+            <div class="flag-container">
+                <span class="flag" style="color: red;">&#x1F6A9;</span>
+            </div>
+        {% else %}
+            <div class="flag-container">
+                <span class="flag" style="color: green;">&#x1F7E2;</span>
+            </div>
+        {% endif %}
+        <div class="churn-risk-scores">
+            <div>Churn Risk Scores: {{ churn_risk_scores }} Out of 100</div>
+        </div>
+        <div class="churn-text">
+            {% if prediction == 'YES' %}
+                Customer is likely to churn
+            {% else %}
+                Customer is not likely to churn
+            {% endif %}
+        </div>
+        <div class="back-button-container">
+            <form action="/" method="get">
+                <button type="submit" class="back-button">Back</button>
+            </form>
+        </div>
+    </div>
+</body>
